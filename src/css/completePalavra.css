@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/*Stilizando a navbar*/
+.progresso{
+  width: 70%;
+  margin: 0% 5% 2% 5%;
+  border-radius: 80px 80px 80px 80px;
+  background-color: white;
+}
+
+.progresso-verde{
+  width: 0%; /*Alterar aqui para a barra verde chegar no final MAXIMO DE 100*/
+  padding: 20px;
+  border-radius: 80px 80px 80px 80px;
+  background-color: #3DF92C;
+}
+
+.vida{
+  width: 100%;
+  background-color: #402097;
+  padding-top: 40px;
+  display: flex;
+}
+
+.navbar{
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  background-color: #6a36fa;
+}
+
+.navbar a{
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
+  margin-left: 30px;
+}
+
+.coracao{
+  height: 30px;
+  width: 30px;
+  margin-top: 6px;
+  margin-left: 5px;
+  color: white;
+ }
+
+/*Parte do game*/
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  }
+
+.pergunta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  border: 5px solid #402097;
+  /*padding: 20% 40% 0em ;*/
+  margin: 3em;
+  border-radius: 30px;
+}
+
+.pergunta p{
+font-size: 2em;
+ /*margin: 5em 7em 5em 7em;   cima direta baixo esqueda  */
+}
+.dentro{
+  margin: 5em 7em 5em 7em;
+}
+
+.Formes1{
+  display: flex;
+  justify-content: center;
+}
+
+#palavra{
+  margin-left: 40%;
+  font-size: 7em;
+}
+
+input[type="text"] {
+  margin-left: 5px;
+  width: 30%;
+  border: none;
+  font-size: 7em;
+  color: black;
+}
+
+input::placeholder {
+  color: #402097; /* Altere para a cor desejada */
+}
+
+
+input[type="text"]::-webkit-outer-spin-button,
+input[type="text"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="text"] {
+  -moz-appearance: textfield;
+}
+

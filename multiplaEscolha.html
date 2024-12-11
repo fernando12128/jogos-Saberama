@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="Logo.svg" />
+    <title>Jogo complete a palavra</title>
+
+    <link rel="stylesheet" href="./src/css/multiplaEscolha.css">
+</head>
+<body>
+    
+    <div class="vida">
+
+        <div class="progresso">
+            <div class="progresso-verde"></div>
+        </div>
+
+        <!--isso tudo é o icone do coração kkkkkkkkkk-->
+        <svg id="coracao1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill coracao" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+          </svg>
+
+          <svg id="coracao2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill coracao" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+          </svg>
+
+          <svg id="coracao3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill coracao" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+          </svg>
+
+    </div>
+
+    <div class="navbar">
+        <a href="index.html">VOLTAR</a> <!--terminar de colocar as imagens/icones-->
+    </div>
+
+
+    <div class="container">
+        <div class="pergunta">
+            <img id="start-synthesis" src="Img/Audio.png" alt="Imagem de Som">
+            <p>O que você escuta?</p>
+        </div>
+
+        <div class="respostas">
+            <button id="pergunta0" class="botao" onclick="Verificando(this.innerHTML)">Pergunta 1</button>
+            <button id="pergunta1" class="botao" onclick="Verificando(this.innerHTML)">Pergunta 2</button>
+            <button id="pergunta2" class="botao" onclick="Verificando(this.innerHTML)">Pergunta 3</button>
+            <button id="pergunta3" class="botao" onclick="Verificando(this.innerHTML)">Pergunta 4</button>
+        </div>
+
+    </div>
+
+    <script type="module" src="src/js/jogoMultiplaEscolha.js" defer></script>
+
+</body>
+</html>

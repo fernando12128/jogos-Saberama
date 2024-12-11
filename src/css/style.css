@@ -1,0 +1,29 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  
+}
+
+.content{
+  display: flex;
+  width: auto;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(33, 40, 76);
+}
+
+.iniciarJogo{
+  padding: 20px;
+  font-size: large;
+  font-weight: 700;
+  background-color: yellow;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: pulse 2s infinite;
+  cursor: pointer;
+}
+
+.inciarJogo:hover{
+  background-color: green;
+}

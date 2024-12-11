@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/*Stilizando a navbar*/
+.progresso{
+  width: 70%;
+  margin: 0% 5% 2% 5%;
+  border-radius: 80px 80px 80px 80px;
+  background-color: white;
+}
+
+.progresso-verde{
+  width: 0%; /*Alterar aqui para a barra verde chegar no final MAXIMO DE 100*/
+  padding: 20px;
+  border-radius: 80px 80px 80px 80px;
+  background-color: #3DF92C;
+}
+
+.vida{
+  width: 100%;
+  background-color: #402097;
+  padding-top: 40px;
+  display: flex;
+}
+
+.navbar{
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  background-color: #6a36fa;
+}
+
+.navbar a{
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
+  margin-left: 30px;
+}
+
+.coracao{
+  height: 30px;
+  width: 30px;
+  margin-top: 6px;
+  margin-left: 5px;
+  color: white;
+ }
+
+/*Parte do game*/
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  }
+
+.pergunta{
+  border: 5px solid #402097;
+  margin: 3em;
+  border-radius: 30px;
+}
+
+.pergunta p{
+  font-size: 3em;
+  margin: 1em 5em 4em 5em; /* cima direta baixo esqueda  */
+}
+
+.botao{
+  font-size: 23px;
+  padding: 10px 4em 17px 4em;
+  margin: 1em;
+  cursor: pointer;
+  color: white;
+  border-radius: 30px;
+  background: rgb(81,0,134);
+  background: linear-gradient(180deg, rgba(81,0,134,1) 0%, rgba(163,43,240,1) 100%);
+  
+}
+
+.respostas{
+  display: flex;
+  flex-direction: column;
+}
+
+img{
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+
+

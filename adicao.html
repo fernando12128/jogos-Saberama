@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="Logo.svg" />
+    <title>Jogo de Matemática</title>
+    <link rel="stylesheet" href="src/css/adicao.css">
+</head>
+
+<body>
+    <div id="header">
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+    <div id="container">
+        <div>
+            VOLTAR
+        </div>
+    </div>
+    <div class="contas">
+        <div class="question-block">
+            <div class="question">0 + 0</div>
+            <div class="icon"></div>
+        </div>
+        <div class="question-block">
+            <div class="question">0 + 0</div>
+            <div class="icon"></div>
+        </div>
+        <div class="question-block">
+            <div class="question">0 + 0</div>
+            <div class="icon"></div>
+            
+        </div>
+    </div>
+
+    <div class="contas">
+        <div class="respostas-block">
+            <div class="resposta">0</div>
+            
+        </div>
+        <div class="respostas-block">
+            <div class="resposta">0</div>
+            <div class="icon"></div>
+        </div>
+        <div class="respostas-block">
+            <div class="resposta">0</div>
+            <div class="icon"></div>
+
+        </div>
+    </div>
+
+
+    <script>
+        let progressoAtual = 0; // Inicia o progresso em 0
+    
+        // Função para gerar número aleatório entre 0 e 99
+        function gerarNumeroAleatorio() {
+            return Math.floor(Math.random() * 10);
+        }
+    
+        // Função para embaralhar elementos
+        function embaralhar(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+    
+        // Função para gerar contas de adição aleatórias e exibir respostas embaralhadas
+        function gerarContas() {
+            const questions = document.querySelectorAll('.question');
+            const respostas = document.querySelectorAll('.resposta');
+    
+            const resultados = [];
+    
+            questions.forEach((question, index) => {
+                const num1 = gerarNumeroAleatorio();
+                const num2 = gerarNumeroAleatorio();
+                const resultado = num1 + num2;
+    
+                question.textContent = `${num1} + ${num2} =`;
+                question.setAttribute('data-resposta', resultado); // Armazena a resposta correta
+    
+                // Adiciona o resultado à lista de resultados
+                resultados.push({ index, resultado });
+            });
+    
+            // Embaralha os resultados para posicionar aleatoriamente
+            const resultadosEmbaralhados = embaralhar(resultados);
+    
+            // Preenche as respostas nos elementos de forma embaralhada
+            respostas.forEach((resposta, index) => {
+                resposta.textContent = ` ${resultadosEmbaralhados[index].resultado}`;
+                resposta.setAttribute('draggable', true); // Permite arrastar
+                resposta.setAttribute('data-resposta', resultadosEmbaralhados[index].resultado); // Armazena o valor correto
+                resposta.id = `resposta-${index}`; // Atribui um ID único para cada resposta
+            });
+        }
+    
+        // Função para atualizar a barra de progresso
+        function atualizarBarraDeProgresso() {
+            progressoAtual += 33.3; // Incrementa em 33.3% a cada acerto
+            const barraProgresso = document.querySelector('.progress');
+            barraProgresso.style.width = `${progressoAtual}%`;
+    
+            if (progressoAtual >= 100) {
+                barraProgresso.style.width = '100%'; // Garante que não ultrapasse 100%
+            }
+        }
+    
+        // Adicionar eventos de arrastar e soltar
+        function adicionarEventosDragAndDrop() {
+            const respostas = document.querySelectorAll('.resposta');
+            const questionBlocks = document.querySelectorAll('.question-block');
+    
+            respostas.forEach(resposta => {
+                resposta.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('text/html', e.target.outerHTML);
+                    e.dataTransfer.setData('data-resposta', e.target.getAttribute('data-resposta'));
+                    resposta.classList.add('dragging');
+                    setTimeout(() => {
+                        resposta.style.display = 'none'; // Oculta ao arrastar
+                    }, 0);
+                });
+    
+                resposta.addEventListener('dragend', e => {
+                    resposta.style.display = 'block'; // Mostra se não soltar corretamente
+                    resposta.classList.remove('dragging');
+                });
+            });
+    
+            questionBlocks.forEach(block => {
+                block.addEventListener('dragover', e => {
+                    e.preventDefault(); // Necessário para permitir o drop
+                });
+    
+                block.addEventListener('drop', e => {
+                    e.preventDefault();
+                    const respostaCerta = block.querySelector('.question').getAttribute('data-resposta');
+                    const respostaArrastada = e.dataTransfer.getData('data-resposta');
+                    const elemento = document.querySelector(`.resposta[data-resposta="${respostaArrastada}"]`);
+    
+                    // Verificação de resposta
+                    if (respostaCerta === respostaArrastada) {
+                        block.style.backgroundColor = '#c8e6c9'; // Verde se correto
+                        block.style.color = '#388e3c';
+                        elemento.remove(); // Remove a resposta correta
+                        atualizarBarraDeProgresso(); // Atualiza a barra de progresso
+                    } else {
+                        block.style.backgroundColor = '#ffcdd2'; // Vermelho se errado
+                        block.style.color = '#d32f2f';
+                        elemento.style.display = 'block'; // Mantém visível se errar
+                    }
+                });
+            });
+        }
+    
+        // Chamar funções ao carregar a página
+        window.onload = function () {
+            gerarContas();
+            adicionarEventosDragAndDrop();
+        };
+    </script>
+    
+    
+</body>
+
+</html>
