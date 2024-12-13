@@ -1,7 +1,7 @@
 import { CohereClientV2 } from 'cohere-ai';
 
 const cohere = new CohereClientV2({
-  token: 'kFQigMYaiQyp4TKAPxL2DQmhsDq0lVRAJLGxr7xv',
+  token: '',//colocar sua key aq
 });
 
 let novaparada = "";
