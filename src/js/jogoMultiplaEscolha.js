@@ -1,7 +1,7 @@
 import { CohereClientV2 } from 'cohere-ai';
 
 const cohere = new CohereClientV2({
-  token: '',//colocar sua key aq
+  token: 'kFQigMYaiQyp4TKAPxL2DQmhsDq0lVRAJLGxr7xv',//colocar sua key aq
 });
 
 let novaparada = "";
@@ -60,7 +60,7 @@ async function iniciando() {
   }
 }
 
-
+let contagem = 0
 let Formes; 
 // Função para verificar a resposta
 function Verificando(resposta) {
@@ -69,9 +69,15 @@ function Verificando(resposta) {
       //console.log("Correto");  terminar de colocar as funções de vida
       BarraProgresso();
       resetarJogo();
-    } else {
       
-      Formes = document.querySelector(".Formes");;
+    } else {
+      console.log("errou")
+      Formes = document.querySelectorAll(".coracao")[contagem];
+      Formes.style.opacity = "0";
+      contagem++
+      if(contagem === 3){
+        window.location.href = "estatisticasMorreu.html";
+      }
     }
   } else {
     console.log("Nada foi selecionado.");
@@ -94,15 +100,17 @@ function BarraProgresso() {
     // Incrementa o contador de rodadas
     rodadasCompletas++;
     localStorage.setItem("rodadasCompletas", rodadasCompletas);
-
+    
     // Verifica se 3 rodadas foram concluídas
-    if (rodadasCompletas >= 3) {
-      ReiniciarTudo();
+    if (rodadasCompletas === 3) {
+      window.location.href = "estatisticas.html";
     }
   } else {
     console.error("Elemento .progresso-verde não encontrado!");
   }
 }
+
+
 let anti = [];
 let antiga 
 // Função para resetar o jogo
@@ -128,6 +136,7 @@ function ReiniciarTudo() {
 
 // Inicialização ao carregar a página
 window.addEventListener("load", async function () {
+  ReiniciarTudo()
   await buscarPalavras(); // Busca as palavras ao carregar o jogo.
 });
 

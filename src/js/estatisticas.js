@@ -4,37 +4,74 @@ const cohere = new CohereClientV2({
   token: 'kFQigMYaiQyp4TKAPxL2DQmhsDq0lVRAJLGxr7xv',
 });
 
+let mensagemRaw;
+
 // Função para buscar palavras da API
-async function buscarPalavras() {
+async function buscarMensagem() {
   try {
     const response = await cohere.chat({
       model: 'command-r-plus',
       messages: [
         {
           role: 'user',
-          content:
-            'Gerar 4 palavras em português o mais aleatorio possivel com no máximo, 5 letras, sem nenhum tipo de acento e colocar elas em uma array e retornar somente a array',
+          content: 'Gere uma resposta curta para um aluno da EJA que incentive-o a estudar mais',
         },
       ],
     });
 
-    //console.log(response);  Verifique o formato da resposta.
+    // Log completo para verificar a resposta
+    console.log("Resposta completa da API:", response);
 
-    // Extraindo a string de conteúdo e corrigindo formato.
-    let mensagemRaw = response.message.content[0].text;
-    mensagemRaw = mensagemRaw.replace(/'/g, '"').trim();
+    // Verifique se response.message.content é um array
+    if (response.message && response.message.content && Array.isArray(response.message.content)) {
+      const firstMessage = response.message.content[0];
+      console.log("Primeiro item de response.message.content:", firstMessage);
 
-    // Convertendo a string JSON para um array real.
-    const mensagem = JSON.parse(mensagemRaw);
-
-    if (Array.isArray(mensagem)) {
-      arrayAleatoria = mensagem; // Atualiza as palavras geradas.
-      palavra = arrayAleatoria[Math.floor(Math.random() * arrayAleatoria.length)]; // Define a nova palavra correta.
-      iniciando(); // Atualiza o jogo com as novas palavras.
+      // Verificar se o primeiro item tem a propriedade "text"
+      if (firstMessage && firstMessage.text) {
+        mensagemRaw = firstMessage.text.trim();
+        console.log("Mensagem extraída:", mensagemRaw); // Log para confirmar
+      } else {
+        console.error("O primeiro item não contém o campo 'text':", firstMessage);
+      }
     } else {
-      console.error('A mensagem retornada não é uma array válida:', mensagem);
+      console.error("Formato inesperado de response.message.content:", response.message.content);
     }
   } catch (error) {
     console.error('Erro ao buscar dados da API:', error);
   }
 }
+
+
+// Configuração de reconhecimento de fala
+const recognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+
+if (recognition) {
+  const recognizer = new recognition();
+  recognizer.lang = 'pt-br';
+  recognizer.maxAlternatives = 1;
+
+  recognizer.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    console.log(transcript);
+  };
+
+  recognizer.onerror = (event) => {
+    console.error('Erro no reconhecimento de fala:', event);
+  };
+
+} else {
+  console.error('A API de reconhecimento de fala não é suportada neste navegador.');
+}
+
+// Configuração de síntese de fala
+document.getElementById('Melhore').addEventListener('click', () => {
+  const utterance = new SpeechSynthesisUtterance(mensagemRaw);
+  utterance.voice = speechSynthesis.getVoices()[0];
+  utterance.pitch = 1;
+  utterance.rate = 1;
+  speechSynthesis.speak(utterance);
+});
+
+// Chamar a função ao carregar a página
+window.addEventListener("load", buscarMensagem);
